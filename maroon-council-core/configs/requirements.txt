@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+langgraph
+langchain
+pydantic
+psycopg2-binary
+pgvector
+langchain-google-vertexai

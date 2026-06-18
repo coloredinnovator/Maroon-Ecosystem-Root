@@ -1,0 +1,66 @@
+ecosystem: "Maroon Technologies"
+version: "3.0"
+repositories:
+  # === CORE ORCHESTRATION & INTELLIGENCE ===
+  - id: maroon-council-core
+    purpose: "Master Orchestrator (LangGraph)"
+    tech: ["Python", "FastAPI", "LangGraph"]
+  - id: maroon-palantir-lake
+    purpose: "Sovereign Data Lake & OSINT"
+    tech: ["BigQuery", "Spark", "pgvector"]
+  - id: maroon-truth-teller-core
+    purpose: "Cryptographic Audit (Merkle-DAG)"
+    tech: ["Rust", "Go", "SHA-512"]
+  - id: maroon-compliance-core
+    purpose: "Zero-Trust Gatekeeper"
+    tech: ["Python", "Pydantic", "GCP IAM"]
+
+  # === SOCIAL & MEDIA ===
+  - id: safe-space-core
+    purpose: "Sovereign Social Hub"
+    tech: ["React Native", "Node.js", "GraphQL"]
+  - id: maroon-tube-core
+    purpose: "Video/Reels Engine"
+    tech: ["Go", "HLS", "WebRTC"]
+  - id: maroon-world-core
+    purpose: "Gaming Engine (Godot Fork)"
+    tech: ["C++", "WebGL"]
+
+  # === COMMERCE & LOGISTICS ===
+  - id: maroon-market-core
+    purpose: "Shopify-like Multi-tenant Engine"
+    tech: ["MedusaJS", "PostgreSQL", "React"]
+  - id: onitas-market-core
+    purpose: "First-Party Grocery Entity"
+    tech: ["React Native", "Firebase"]
+  - id: maroon-market-logistics
+    purpose: "Cold-Chain & Port Logistics"
+    tech: ["Python", "Go", "Google Maps API"]
+
+  # === HEALTHCARE (MAROON MEDICAL) ===
+  - id: maroon-medical-opco
+    purpose: "Clinical Ops (MIH, SNF, Home Health)"
+    tech: ["Node.js", "React Native", "Firebase"]
+  - id: maroon-medical-diagnostics
+    purpose: "PGx & Toxicology Labs"
+    tech: ["Python", "FastAPI", "BigQuery"]
+  - id: maroon-medical-rehab
+    purpose: "RTM & Wearable Integration"
+    tech: ["Python", "BLE", "Zod"]
+
+  # === INFRASTRUCTURE & SOVEREIGNTY ===
+  - id: maroon-sovereign-infra
+    purpose: "IaC (Terraform/K8s)"
+    tech: ["Terraform", "Kubernetes", "Docker"]
+  - id: maroon-osint-swarm
+    purpose: "Reconnaissance & Threat Calculus"
+    tech: ["Python", "HuggingFace", "Scrapy"]
+  - id: maroon-pac-core
+    purpose: "Political & Voting Infrastructure"
+    tech: ["Python", "PostgreSQL"]
+  - id: maroon-real-estate-core
+    purpose: "Land Trust & Asset Management"
+    tech: ["Node.js", "PostgreSQL"]
+  - id: maroon-law-finance-core
+    purpose: "Sovereign Fund & Legal Framework"
+    tech: ["Python", "FastAPI"]

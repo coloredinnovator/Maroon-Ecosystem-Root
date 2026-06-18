@@ -1,0 +1,14 @@
+{
+  "name": "onitas-market-core",
+  "version": "3.0.0",
+  "description": "First-Party Grocery App bridging to Maroon Market.",
+  "scripts": {
+    "start": "expo start"
+  },
+  "dependencies": {
+    "expo": "^50.0.0",
+    "react-native": "0.73.4",
+    "firebase": "^10.8.0",
+    "@medusajs/medusa-js": "^6.1.1"
+  }
+}

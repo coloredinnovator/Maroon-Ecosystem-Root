@@ -1,0 +1,6 @@
+pyspark
+kafka-python
+psycopg2-binary
+pgvector
+google-cloud-storage
+google-cloud-bigquery

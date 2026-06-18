@@ -1,0 +1,13 @@
+[package]
+name = "maroon-truth-teller-core"
+version = "4.0.0"
+edition = "2021"
+description = "Cryptographic audit layer for the Maroon Ecosystem — SHA-512 + Merkle-DAG"
+
+[dependencies]
+sha2 = "0.10.8"
+hex = "0.4.3"
+tokio = { version = "1.32.0", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+actix-web = "4"

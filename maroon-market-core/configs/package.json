@@ -1,0 +1,14 @@
+{
+  "name": "maroon-market-core",
+  "version": "3.0.0",
+  "description": "Headless Shopify-like Commerce Engine",
+  "scripts": {
+    "start": "medusa start",
+    "seed": "medusa seed"
+  },
+  "dependencies": {
+    "@medusajs/medusa": "^1.19.0",
+    "pg": "^8.11.3",
+    "redis": "^4.6.10"
+  }
+}
