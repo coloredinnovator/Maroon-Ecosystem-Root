@@ -4,6 +4,10 @@
 > **Revision:** 4.0 (NASA-Grade Structural Elevation)
 > **Authority:** Maroon Ecosystem Governance Council
 > **Last Updated:** 2026-06-18
+>
+> **Companion Documents:**
+> - [MAROON_CONTROL_PLANE.md](MAROON_CONTROL_PLANE.md) — Strategic Doctrine (RULE 0, MIVL, MEPP, Adversarial Calculus)
+> - [MAROON_OPERATIONS_MANUAL.md](MAROON_OPERATIONS_MANUAL.md) — Build & Deploy Doctrine (State Machine, Flywheel, Agent Roster)
 
 ---
 

@@ -1,0 +1,242 @@
+# =============================================================================
+# Maroon Ecosystem — Stack Manifest v4.0
+# The single source of truth for all repos in the sovereign ecosystem.
+# Any AI agent operating on this ecosystem MUST read this file first.
+# =============================================================================
+
+ecosystem:
+  name: Maroon Ecosystem
+  version: "4.0.0"
+  owner: Maroon Technologies (Perpetual Purpose Trust)
+  github_org: coloredinnovator
+  primary_branch: main
+
+# ---------------------------------------------------------------------------
+# Binding Specification Documents (Read Before Any Operation)
+# ---------------------------------------------------------------------------
+specifications:
+  - path: MAROON_MASTER_CODEX.md       # Technical Architecture
+  - path: MAROON_CONTROL_PLANE.md      # Strategic Doctrine (RULE 0)
+  - path: MAROON_OPERATIONS_MANUAL.md  # Build & Deploy Doctrine
+
+# ---------------------------------------------------------------------------
+# The 18 Sovereign Services
+# ---------------------------------------------------------------------------
+repos:
+
+  # ── THE BRAIN (Control Plane) ──────────────────────────────────
+  - name: maroon-council-core
+    path: ./maroon-council-core
+    lang: python
+    framework: FastAPI + LangGraph
+    port: 8000
+    role: Multi-agent orchestrator (The Supervisor)
+    tier: control-plane
+
+  - name: maroon-truth-teller-core
+    path: ./maroon-truth-teller-core
+    lang: rust
+    framework: Actix-Web
+    port: 8001
+    role: SHA-512 Merkle-DAG cryptographic audit
+    tier: control-plane
+
+  - name: maroon-compliance-core
+    path: ./maroon-compliance-core
+    lang: python
+    framework: FastAPI
+    port: 8002
+    role: HIPAA/GDPR/AML zero-trust gatekeeper
+    tier: control-plane
+
+  - name: maroon-palantir-lake
+    path: ./maroon-palantir-lake
+    lang: python
+    framework: FastAPI + Kafka
+    port: 8010
+    role: Medallion lakehouse (Bronze → Silver → Gold)
+    tier: control-plane
+    database: PostgreSQL (pgvector)
+
+  # ── SOCIAL / MEDIA / GAMING ────────────────────────────────────
+  - name: safe-space-core
+    path: ./safe-space-core
+    lang: node
+    framework: Express + Apollo GraphQL
+    port: 4000
+    role: Sovereign social hub
+    tier: engagement
+
+  - name: maroon-tube-core
+    path: ./maroon-tube-core
+    lang: go
+    framework: net/http + FFmpeg
+    port: 8080
+    role: HLS video streaming engine
+    tier: engagement
+
+  - name: maroon-world-core
+    path: ./maroon-world-core
+    lang: cpp
+    framework: Godot GDExtension
+    port: null
+    role: Gaming platform + Maroon Currency marketplace
+    tier: engagement
+
+  # ── COMMERCE & LOGISTICS ───────────────────────────────────────
+  - name: maroon-market-core
+    path: ./maroon-market-core
+    lang: typescript
+    framework: MedusaJS
+    port: 9000
+    role: Headless commerce (split-tender, EBT, sovereign store)
+    tier: commerce
+
+  - name: onitas-market-core
+    path: ./onitas-market-core
+    lang: typescript
+    framework: React + Next.js
+    port: 3000
+    role: First-party grocery storefront (EBT-eligible)
+    tier: commerce
+
+  - name: maroon-market-logistics
+    path: ./maroon-market-logistics
+    lang: python
+    framework: FastAPI + OR-Tools
+    port: 8004
+    role: Route optimization + geofenced delivery
+    tier: commerce
+    mepp_rules:
+      - sovereign_logistics_ceiling  # Council-governed fee cap
+      - split_tender_orchestration   # EBT separation at microsecond
+      - rls_cap_300                  # $300/month vendor fee ceiling
+
+  # ── HEALTHCARE ─────────────────────────────────────────────────
+  - name: maroon-medical-opco
+    path: ./maroon-medical-opco
+    lang: python
+    framework: FastAPI + Firebase
+    port: 8005
+    role: MIH/SNF/PPECC patient management + care dispatch
+    tier: healthcare
+
+  - name: maroon-medical-diagnostics
+    path: ./maroon-medical-diagnostics
+    lang: python
+    framework: FastAPI
+    port: 8006
+    role: PGx/Toxicology lab + HL7 FHIR R4
+    tier: healthcare
+
+  - name: maroon-medical-rehab
+    path: ./maroon-medical-rehab
+    lang: python
+    framework: FastAPI
+    port: 8007
+    role: RTM with BLE IoT vitals + threshold alerts
+    tier: healthcare
+
+  # ── CIVIC & LEGAL ──────────────────────────────────────────────
+  - name: maroon-pac-core
+    path: ./maroon-pac-core
+    lang: python
+    framework: FastAPI
+    port: 8008
+    role: Cryptographic anonymous voting + governance
+    tier: civic
+
+  - name: maroon-real-estate-core
+    path: ./maroon-real-estate-core
+    lang: node
+    framework: Express
+    port: 8003
+    role: Land trusts, tax liens, opportunity zones
+    tier: civic
+
+  - name: maroon-law-finance-core
+    path: ./maroon-law-finance-core
+    lang: python
+    framework: FastAPI
+    port: 8009
+    role: Contracts, e-signatures, escrow lifecycle
+    tier: civic
+
+  # ── INTELLIGENCE & INFRASTRUCTURE ──────────────────────────────
+  - name: maroon-osint-swarm
+    path: ./maroon-osint-swarm
+    lang: python
+    framework: Scrapy
+    port: null
+    role: Spider network for public data collection
+    tier: intelligence
+
+  - name: maroon-sovereign-infra
+    path: ./maroon-sovereign-infra
+    lang: hcl
+    framework: Terraform
+    port: null
+    role: GCP IaC (VPC, GKE, Cloud SQL, BigQuery, GCS)
+    tier: infrastructure
+
+# ---------------------------------------------------------------------------
+# External OSS Dependencies (Tactical Advantage Stack)
+# ---------------------------------------------------------------------------
+oss_integrations:
+
+  financial:
+    - repo: captableinc/captable
+      purpose: Cap table management
+      target: maroon-law-finance-core
+
+    - repo: vyayasan/kyc-analyst
+      purpose: KYC/AML compliance (17 checkpoints)
+      target: maroon-compliance-core
+
+    - repo: cfpb/hmda-platform
+      purpose: CFPB Reg C (HMDA) reporting
+      target: maroon-real-estate-core
+
+  ai:
+    - repo: deepset-ai/haystack
+      purpose: Traceable AI orchestration
+      target: maroon-council-core
+
+  logistics:
+    - repo: enatega/enatega
+      purpose: Multi-vendor food delivery
+      target: maroon-market-logistics
+
+  retail_ai:
+    - repo: huggingface/eCeLLM
+      purpose: E-commerce LLM
+      target: maroon-market-core
+
+    - repo: scionoftech/functiongemma-e-commerce
+      purpose: Localized retail agent training
+      target: onitas-market-core
+
+# ---------------------------------------------------------------------------
+# Infrastructure Dependencies
+# ---------------------------------------------------------------------------
+infrastructure:
+  databases:
+    - type: PostgreSQL 16 (pgvector)
+      services: [compliance-core, palantir-lake, safe-space, market-core, pac-core, real-estate, law-finance, diagnostics, rehab]
+    - type: Firestore
+      services: [medical-opco]
+    - type: TimescaleDB
+      services: [medical-rehab]
+
+  message_bus:
+    type: Apache Kafka (Confluent)
+    topics:
+      - bronze_raw_ingress
+      - compliance_events
+      - financial_transactions
+      - identity_verification
+
+  object_storage:
+    - bucket: media-assets (HLS segments, video uploads)
+    - bucket: osint-output (spider data)
+    - bucket: terraform-state (IaC state files)
