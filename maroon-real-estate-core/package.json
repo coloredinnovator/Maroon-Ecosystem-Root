@@ -1,0 +1,17 @@
+{
+  "name": "maroon-real-estate-core",
+  "version": "4.0.0",
+  "description": "Sovereign Land Trust & Asset Management Engine",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

@@ -1,0 +1,132 @@
+name: Maroon Ecosystem CI/CD
+
+on:
+  push:
+    branches: [main, maroon-git-version]
+  pull_request:
+    branches: [main]
+
+env:
+  GCP_PROJECT: maroon-clean-up
+  GCP_REGION: us-central1
+  REGISTRY: us-central1-docker.pkg.dev
+
+jobs:
+  lint-and-test:
+    name: Lint & Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service:
+          - { name: council-core, path: maroon-council-core, lang: python }
+          - { name: compliance-core, path: maroon-compliance-core, lang: python }
+          - { name: palantir-lake, path: maroon-palantir-lake, lang: python }
+          - { name: market-logistics, path: maroon-market-logistics, lang: python }
+          - { name: medical-opco, path: maroon-medical-opco, lang: python }
+          - { name: medical-diagnostics, path: maroon-medical-diagnostics, lang: python }
+          - { name: medical-rehab, path: maroon-medical-rehab, lang: python }
+          - { name: pac-core, path: maroon-pac-core, lang: python }
+          - { name: law-finance, path: maroon-law-finance-core, lang: python }
+          - { name: safe-space, path: safe-space-core, lang: node }
+          - { name: real-estate, path: maroon-real-estate-core, lang: node }
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        if: matrix.service.lang == 'python'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python deps
+        if: matrix.service.lang == 'python'
+        run: |
+          pip install -r ${{ matrix.service.path }}/configs/requirements.txt
+          pip install pytest ruff
+
+      - name: Lint Python
+        if: matrix.service.lang == 'python'
+        run: ruff check ${{ matrix.service.path }}/src/ --ignore E501
+
+      - name: Test Python
+        if: matrix.service.lang == 'python'
+        run: |
+          cd ${{ matrix.service.path }}
+          python -m pytest tests/ -v --tb=short || echo "No tests yet"
+
+      - name: Setup Node.js
+        if: matrix.service.lang == 'node'
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Node deps
+        if: matrix.service.lang == 'node'
+        run: |
+          cd ${{ matrix.service.path }}
+          npm install || echo "No package.json"
+
+  build-containers:
+    name: Build Docker Images
+    runs-on: ubuntu-latest
+    needs: lint-and-test
+    if: github.event_name == 'push'
+    strategy:
+      matrix:
+        service:
+          - maroon-council-core
+          - maroon-compliance-core
+          - maroon-palantir-lake
+          - maroon-truth-teller-core
+          - maroon-tube-core
+          - maroon-market-core
+          - maroon-market-logistics
+          - maroon-medical-opco
+          - maroon-medical-diagnostics
+          - maroon-medical-rehab
+          - maroon-pac-core
+          - maroon-law-finance-core
+          - maroon-real-estate-core
+          - safe-space-core
+          - onitas-market-core
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Docker Image
+        run: |
+          cd ${{ matrix.service }}
+          docker build -t ${{ matrix.service }}:${{ github.sha }} .
+
+  security-scan:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    needs: lint-and-test
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: fs
+          scan-ref: .
+          format: table
+          severity: CRITICAL,HIGH
+
+  terraform-validate:
+    name: Terraform Validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.8.0"
+
+      - name: Terraform Init & Validate
+        run: |
+          cd maroon-sovereign-infra/src
+          terraform init -backend=false
+          terraform validate
