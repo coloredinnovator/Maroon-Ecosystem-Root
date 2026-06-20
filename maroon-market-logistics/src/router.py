@@ -12,7 +12,6 @@ from enum import Enum
 import hashlib
 import json
 import math
-import uuid
 
 app = FastAPI(
     title="Maroon Market Logistics",

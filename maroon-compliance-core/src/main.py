@@ -3,7 +3,7 @@ Maroon Compliance Core — Zero-Trust Gatekeeper (v5.0 - NASA Grade)
 Codex §3.3: Enforces HIPAA, GDPR, EBT, and AML constraints.
 Every transaction event is validated before it touches any downstream service.
 """
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from pydantic import BaseModel, Field, ConfigDict
 from typing import Optional, List, Dict
 from datetime import datetime, timezone

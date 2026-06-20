@@ -9,9 +9,8 @@ Core Financial Laws:
   - Zero Penny Drift: Math uses integer cents — NO floating-point arithmetic permitted internally.
 """
 import hashlib
-import json
 from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
-from typing import List, Dict, Any, Optional
+from typing import List, Any, Optional
 from pydantic import BaseModel, Field, field_validator, ConfigDict
 
 # ---------------------------------------------------------------------------

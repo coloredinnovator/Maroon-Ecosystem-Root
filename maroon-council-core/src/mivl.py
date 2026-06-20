@@ -14,7 +14,7 @@ import hashlib
 from datetime import datetime, timezone
 from enum import IntEnum
 from typing import List, Optional, Dict, Set
-from pydantic import BaseModel, Field, ConfigDict, field_validator
+from pydantic import BaseModel, Field, ConfigDict
 
 # ---------------------------------------------------------------------------
 # Exceptions — Harvard-Grade Fault Tolerance

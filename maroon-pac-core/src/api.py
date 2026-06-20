@@ -6,7 +6,7 @@ All votes immutably recorded via Truth-Teller.
 """
 from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel, Field
-from typing import Optional, List, Dict, Any
+from typing import Optional, List, Dict
 from datetime import datetime, timezone
 from enum import Enum
 import hashlib

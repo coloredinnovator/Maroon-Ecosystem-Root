@@ -4,9 +4,9 @@ Codex §4.4: Contract generation, e-signature workflows,
 escrow management for Maroon Market transactions,
 regulatory compliance document storage.
 """
-from fastapi import FastAPI, HTTPException, Query, UploadFile, File
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
-from typing import Optional, List, Dict, Any
+from typing import Optional, List, Dict
 from datetime import datetime, timezone
 from enum import Enum
 import hashlib

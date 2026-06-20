@@ -8,7 +8,6 @@ from pydantic import BaseModel, Field
 from typing import Optional, List, Dict, Any
 from datetime import datetime, timezone
 from enum import Enum
-from collections import defaultdict
 import hashlib
 import json
 import uuid

@@ -1,10 +1,10 @@
 """Maroon Medical OpCo — Patient Management API (v4.1)"""
-import sys, os
+import sys
+import os
 sys.path.insert(0, os.path.dirname(__file__))
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import Dict, Any, Optional
 from datetime import datetime, timezone
 
 app = FastAPI(title="Maroon Medical OpCo", version="4.1.0")

@@ -1,5 +1,4 @@
 import urllib.request
-import json
 
 ports = {
     8000: "Council Core",

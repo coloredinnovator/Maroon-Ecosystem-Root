@@ -4,7 +4,6 @@ Uses ChromaDB for local, ultra-fast embedding storage. This is the "Silver Layer
 """
 import os
 import chromadb
-from chromadb.config import Settings
 import logging
 from typing import List, Dict, Any
 

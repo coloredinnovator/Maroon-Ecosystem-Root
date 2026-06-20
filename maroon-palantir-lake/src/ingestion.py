@@ -10,10 +10,10 @@ import os
 import json
 import logging
 import hashlib
-from typing import Dict, Any, Optional, List
+from typing import Optional, List
 from datetime import datetime, timezone
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from pydantic import BaseModel
 
 logger = logging.getLogger("palantir")

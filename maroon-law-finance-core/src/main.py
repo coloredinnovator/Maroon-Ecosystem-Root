@@ -1,11 +1,13 @@
 """Maroon Law & Finance Core — Contracts, Escrow, E-Signatures API (v4.1)"""
-import sys, os
+import sys
+import os
 sys.path.insert(0, os.path.dirname(__file__))
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from datetime import datetime, timezone
-import hashlib, json
+import hashlib
+import json
 
 app = FastAPI(title="Maroon Law & Finance Core", version="4.1.0")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])

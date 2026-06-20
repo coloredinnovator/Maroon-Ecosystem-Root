@@ -17,17 +17,15 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import Dict, Any, Optional, List
+from typing import Dict, Any, List
 from datetime import datetime, timezone
 
 from mivl import (
-    MIVLIdentity, MIVLTier, CookoutProtocol, TIER_ACCESS,
-    IdentityError, TierUpgradeError, CryptographicAnomaly
+    MIVLIdentity, MIVLTier, CookoutProtocol, IdentityError
 )
 from mepp import (
-    split_tender, enforce_rls_cap, to_dollars,
-    SOVEREIGN_LOGISTICS_CEILING_CENTS, RLS_MONTHLY_CAP_CENTS,
-    CartItem, MEPPBaseException, PennyDriftError, SovereignLogisticsViolation, InvalidCurrencyFormat
+    split_tender, enforce_rls_cap, SOVEREIGN_LOGISTICS_CEILING_CENTS, RLS_MONTHLY_CAP_CENTS,
+    CartItem, MEPPBaseException, PennyDriftError
 )
 
 app = FastAPI(

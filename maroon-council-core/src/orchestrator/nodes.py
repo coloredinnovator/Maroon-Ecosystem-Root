@@ -2,8 +2,7 @@ import httpx
 import logging
 import os
 import chromadb
-from langchain_google_vertexai import ChatVertexAI
-from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
+from langchain_core.messages import AIMessage
 from orchestrator.state import OrchestratorState
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] [Nodes] %(message)s')
@@ -94,7 +93,7 @@ def synthesizer_node(state: OrchestratorState) -> OrchestratorState:
         # model = ChatVertexAI(model_name="gemini-1.5-pro-preview-0409")
         # response = model.invoke(prompt)
         
-        system_prompt = (
+        _ = (
             f"You are the Maroon Control Plane. "
             f"Context from Palantir: {state['palantir_context']}\n"
             f"Ledger: {state['ledger_cents']} cents\n"
