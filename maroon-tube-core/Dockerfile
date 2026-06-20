@@ -9,4 +9,5 @@ FROM alpine:3.19
 RUN apk add --no-cache ffmpeg ca-certificates
 COPY --from=builder /maroon-tube /usr/local/bin/
 EXPOSE 8080
+USER nobody
 CMD ["maroon-tube"]

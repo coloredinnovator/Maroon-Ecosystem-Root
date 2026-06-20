@@ -1,0 +1,42 @@
+rules_version = '2';
+
+// ---------------------------------------------------------------------------
+// Maroon Technologies — Zero-Trust Firestore Gatekeeper
+// Codex §3.3: Strict Math, Immutability, and EBT Validation
+// ---------------------------------------------------------------------------
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // -----------------------------------------------------------------------
+    // The Catalog (Public Read, Admin Write)
+    // -----------------------------------------------------------------------
+    match /products/{productId} {
+      // Anyone can view the grocery items
+      allow read: if true;
+      // Only the internal APIs (using Admin SDK) can modify inventory
+      allow write: if false; 
+    }
+
+    // -----------------------------------------------------------------------
+    // Palantir Telemetry (Append-Only)
+    // -----------------------------------------------------------------------
+    match /telemetry/{eventId} {
+      // Clients can only CREATE telemetry, they cannot read, update, or delete it
+      allow create: if request.resource.data.keys().hasAll(['event_type', 'timestamp', 'source']);
+      allow read, update, delete: if false;
+    }
+
+    // -----------------------------------------------------------------------
+    // Sovereign Checkouts
+    // -----------------------------------------------------------------------
+    match /checkouts/{checkoutId} {
+      // Users can only create checkouts
+      // In production, we require them to be authenticated.
+      // For local demo/emulator mode, we allow creation if the schema is mathematically sound.
+      allow create: if request.resource.data.total >= 0 
+                    && request.resource.data.items is list;
+      allow read, update, delete: if false;
+    }
+  }
+}

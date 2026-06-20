@@ -4,4 +4,5 @@ COPY configs/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY src/ ./src/
 EXPOSE 8010
+USER nobody
 CMD ["uvicorn", "src.ingestion:app", "--host", "0.0.0.0", "--port", "8010"]

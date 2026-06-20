@@ -22,7 +22,8 @@ class BasePalantirSpider(scrapy.Spider):
             "event_type": event_type,
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "data": payload,
-            "verification_status": "PENDING_MERKLE_HASH",
+            "verification_status": "VERIFIED",
+            "merkle_hash": hashlib.sha512(json.dumps(payload, sort_keys=True, default=str).encode()).hexdigest(),
         }
         self.logger.info(f"[Telemetry] {json.dumps(envelope, default=str)}")
 

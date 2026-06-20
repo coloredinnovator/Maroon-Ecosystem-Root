@@ -4,4 +4,5 @@ COPY configs/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY src/ ./src/
 EXPOSE 8009
+USER nobody
 CMD ["uvicorn", "src.api:app", "--host", "0.0.0.0", "--port", "8009"]

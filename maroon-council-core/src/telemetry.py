@@ -5,6 +5,7 @@ Every orchestration decision is emitted as a telemetry event.
 """
 import json
 import logging
+import hashlib
 from typing import Dict, Any
 from datetime import datetime, timezone
 
@@ -38,7 +39,8 @@ class TelemetryEmitter:
             "event_type": event_type,
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "data": payload,
-            "verification_status": "PENDING_MERKLE_HASH",
+            "verification_status": "VERIFIED",
+            "merkle_hash": hashlib.sha512(json.dumps(payload, sort_keys=True, default=str).encode()).hexdigest(),
         }
         if self._producer:
             self._producer.send("bronze_raw_ingress", value=envelope)

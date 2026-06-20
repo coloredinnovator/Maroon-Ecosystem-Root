@@ -6,4 +6,5 @@ COPY src/ ./src/
 COPY medusa-config.js .
 RUN npx tsc
 EXPOSE 9000
+USER nobody
 CMD ["medusa", "start"]

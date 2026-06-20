@@ -9,4 +9,5 @@ COPY src/ ./src/
 
 EXPOSE 8004
 
+USER nobody
 CMD ["uvicorn", "src.router:app", "--host", "0.0.0.0", "--port", "8004"]

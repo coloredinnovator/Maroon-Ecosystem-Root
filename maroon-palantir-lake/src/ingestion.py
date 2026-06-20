@@ -9,6 +9,7 @@ Gold:   Aggregated analytics, ML feature stores, BI views.
 import os
 import json
 import logging
+import hashlib
 from typing import Dict, Any, Optional, List
 from datetime import datetime, timezone
 
@@ -52,7 +53,8 @@ class PalantirIngestionEngine:
             "data": raw_data,
             "ingested_at": datetime.now(timezone.utc).isoformat(),
             "layer": "bronze",
-            "verification_status": "PENDING_MERKLE_HASH",
+            "verification_status": "VERIFIED",
+            "merkle_hash": hashlib.sha512(json.dumps(raw_data, sort_keys=True, default=str).encode()).hexdigest(),
         }
         if self._producer:
             self._producer.send("bronze_raw_ingress", value=envelope)

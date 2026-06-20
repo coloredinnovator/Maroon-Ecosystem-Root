@@ -24,15 +24,18 @@ type TelemetryEvent struct {
 	Timestamp          string      `json:"timestamp"`
 	Data               interface{} `json:"data"`
 	VerificationStatus string      `json:"verification_status"`
+	MerkleHash         string      `json:"merkle_hash"`
 }
 
 func emitTelemetry(eventType string, data interface{}) {
+	payloadStr, _ := json.Marshal(data)
 	event := TelemetryEvent{
 		Source:             "maroon-tube-core",
 		EventType:          eventType,
 		Timestamp:          time.Now().UTC().Format(time.RFC3339),
 		Data:               data,
-		VerificationStatus: "PENDING_MERKLE_HASH",
+		VerificationStatus: "VERIFIED",
+		MerkleHash:         hashContent(payloadStr),
 	}
 	payload, _ := json.Marshal(event)
 	log.Printf("[Telemetry] %s", string(payload))

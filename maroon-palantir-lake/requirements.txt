@@ -1,0 +1,10 @@
+google-cloud-storage
+google-cloud-bigquery
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
+tenacity
+chromadb
+sentence-transformers
+langchain-text-splitters
+pydantic

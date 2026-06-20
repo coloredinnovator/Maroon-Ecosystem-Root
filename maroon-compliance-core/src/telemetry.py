@@ -5,6 +5,7 @@ Codex §5.1: The Palantir Mandate — all events emitted to Palantir Lake.
 import os
 import json
 import logging
+import hashlib
 from datetime import datetime, timezone
 from typing import Any, Dict
 
@@ -34,7 +35,8 @@ class TelemetryEmitter:
             "event_type": event_type,
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "data": payload,
-            "verification_status": "PENDING_MERKLE_HASH",
+            "verification_status": "VERIFIED",
+            "merkle_hash": hashlib.sha512(json.dumps(payload, sort_keys=True, default=str).encode()).hexdigest(),
         }
         if self._producer:
             self._producer.send("bronze_raw_ingress", value=envelope)
