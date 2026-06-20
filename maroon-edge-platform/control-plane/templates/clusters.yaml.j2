@@ -1,0 +1,13 @@
+name: "{{ services[0].name }}"
+connect_timeout: 0.25s
+type: STRICT_DNS
+lb_policy: ROUND_ROBIN
+load_assignment:
+  cluster_name: "{{ services[0].name }}"
+  endpoints:
+  - lb_endpoints:
+    - endpoint:
+        address:
+          socket_address:
+            address: "{{ services[0].name }}.local"
+            port_value: {{ services[0].port }}

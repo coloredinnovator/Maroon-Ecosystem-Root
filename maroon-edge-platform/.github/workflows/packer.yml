@@ -1,0 +1,27 @@
+name: Packer Build AMI
+
+on:
+  push:
+    paths:
+      - 'maroon-edge-platform/packer/**'
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build Envoy AMI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Packer
+        uses: hashicorp/setup-packer@main
+
+      - name: Packer Init
+        run: packer init maroon-edge-platform/packer/envoy-ami.json
+
+      - name: Packer Build
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: packer build maroon-edge-platform/packer/envoy-ami.json

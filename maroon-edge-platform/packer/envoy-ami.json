@@ -1,0 +1,38 @@
+{
+  "variables": {
+    "aws_region": "us-west-2",
+    "envoy_version": "1.28.0"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "{{user `aws_region`}}",
+      "source_ami_filter": {
+        "filters": {
+          "virtualization-type": "hvm",
+          "name": "amzn2-ami-hvm-2.0.*-x86_64-gp2",
+          "root-device-type": "ebs"
+        },
+        "owners": ["amazon"],
+        "most_recent": true
+      },
+      "instance_type": "t3.small",
+      "ssh_username": "ec2-user",
+      "ami_name": "maroon-envoy-edge-{{timestamp}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo yum update -y",
+        "sudo yum install -y gettext docker",
+        "sudo systemctl enable docker",
+        "sudo systemctl start docker",
+        "sudo docker pull envoyproxy/envoy:v{{user `envoy_version`}}",
+        "echo 'Envoy image pulled.'",
+        "# Note: Rust sidecars would be downloaded from S3 or pulled from ECR here"
+      ]
+    }
+  ]
+}
